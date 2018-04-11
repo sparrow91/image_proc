@@ -1,0 +1,11 @@
+#filepicker {
+    width: 0px;
+    height: 0px;
+    overflow: hidden;
+}
+label {
+    background-color: goldenrod;
+}
+#filepicker:focus + label{
+    outline: 5px solid teal;
+}
