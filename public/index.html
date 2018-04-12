@@ -2,7 +2,34 @@
     <head>
         <link href="./css/style.css" rel="stylesheet" type="text/css"/>
     </head>
- <h1>Despo</h1>
- <input type="file" accept="images/*" id="filepicker"/>
- <label for="filepicker" >Choose file</label>   
+ <h1>Image Prc</h1>
+ <input type="file" accept="image/*" id="filepicker"/>
+ <label for="filepicker" >Choose file</label>
+ <script src="./js/scripts.js" ></script>
+ <script type="text/javascript">
+    const $filepicker = document.getElementById("filepicker");
+    const fileReader = new FileReader();
+    const img =   new Image();
+    const $canvas = document.createElement("canvas");
+
+    img.addEventListener("load", event => {
+        const ctx = $canvas.getContext("2d");
+        $canvas.width = img.width;
+        $canvas.height = img.height;
+        $canvas.id = "myCanvas"
+        ctx.drawImage(img, 0, 0);
+        var imageData = ctx.getImageData(0, 0, $canvas.width, $canvas.height);
+        applyFilter(imageData.data);
+        ctx.putImageData(imageData, 0, 0)
+        document.body.appendChild($canvas);
+    });
+
+    fileReader.addEventListener("load", event => {
+        base64 = fileReader.result;
+        img.src = base64;
+    });
+
+    $filepicker.addEventListener("change", useImageBitMap);
+
+ </script>
 <html>
